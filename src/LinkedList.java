@@ -17,7 +17,9 @@ public class LinkedList {
         item.setNextNode(null); // In order to avoid circular arguments
         if (this.head == null) {
             this.head = item;
-            this.last = this.head;
+        }
+        if (this.last == null) {
+            this.last = head;
         } else {
             this.last.setNextNode(item);
             this.last = this.last.getNext();
@@ -29,8 +31,14 @@ public class LinkedList {
         Node temp = this.head;
         if (this.head != null) {
             this.head = head.getNext();
-        } else {
-            this.last = null;
+            if (this.head == null) {
+
+                this.last = null;
+            }
+        }
+        if (temp != null) {
+
+            temp.setNextNode(null);
         }
         return temp;
     }
@@ -41,10 +49,7 @@ public class LinkedList {
         } else {
             this.last.setNextNode(b.head);
         }
-        if (this.last != null) {
-
-            this.last = this.last.getNext();// Updates last to point towards first node of list b
-        }
-        b = null;
+        this.last = this.last.getNext();// Updates last to point towards first node of list b
+        b.last.setNextNode(null);
     }
 }

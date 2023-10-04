@@ -21,12 +21,14 @@ public class App {
     public static void QuickSortLinkedListTest() {
         Random rnd = new Random();
         LinkedList list = new LinkedList();
-        for (int i = 0; i < 10; i++) {
-            list.addAtEnd(new Node(rnd.nextInt(10), null));
+        int maxValue = 10;
+        int lengthOfList = 10;
+        for (int i = 0; i < lengthOfList; i++) {
+            list.addAtEnd(new Node(10 - i, null));
         }
-        PrintLinkedList(list);
+        PrintLinkedList(list, "Original");
         list = LinkedListSort(list);
-        PrintLinkedList(list);
+        PrintLinkedList(list, "Original");
 
     }
 
@@ -44,12 +46,12 @@ public class App {
         System.out.println();
     }
 
-    public static void PrintLinkedList(LinkedList list) {
-        System.out.println("List:");
+    public static void PrintLinkedList(LinkedList list, String type) {
+        System.out.println("List:" + type);
         Node current = list.getHead();
         int position = 1;
         while (current != null) {
-            System.out.println("Position " + (position) + "| Value: " + current.getItem());
+            System.out.println(type + " Position " + (position) + "| Value: " + current.getItem());
             position++;
             current = current.getNext();
         }
@@ -57,7 +59,7 @@ public class App {
     }
 
     public static LinkedList LinkedListSort(LinkedList list) {
-        if (list.head!=list.last && list.head!=null) {//If list has 2 or more elements
+        if ((list.head != list.last) && list.head != null && list.last != null) {// If list has 2 or more elements
 
             LinkedList lesser = new LinkedList();
             LinkedList greater = new LinkedList();
@@ -65,6 +67,7 @@ public class App {
             Node pivot = list.removeCurrentFirst();
 
             Node current = list.removeCurrentFirst();
+
             while (current != null) {
                 if (current.getItem() < pivot.getItem()) {
                     lesser.addAtEnd(current);
@@ -74,13 +77,17 @@ public class App {
                 current = list.removeCurrentFirst();
             }
 
-            LinkedListSort(lesser);
-            LinkedListSort(greater);
+            PrintLinkedList(lesser, "lesser");
+            lesser = LinkedListSort(lesser);
+            PrintLinkedList(lesser, "lesser");
 
-            list.appendList(lesser);
-            list.addAtEnd(pivot);
-            list.appendList(greater);
+            PrintLinkedList(greater, "greater");
+            lesser = LinkedListSort(greater);
+            PrintLinkedList(greater, "greater");
 
+            lesser.addAtEnd(pivot);
+            lesser.appendList(greater);
+            list = lesser;
         }
         return list;
     }
