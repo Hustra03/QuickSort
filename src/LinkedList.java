@@ -1,51 +1,101 @@
 public class LinkedList {
 
-    Node head;
+    Node first;
     Node last;
 
     LinkedList() {
-        this.head = null;
+        this.first = null;
         this.last = null;
     }
 
-    public Node getHead() {
-        return this.head;
+    public Node getFirst() {
+        return this.first;
     }
 
-    public void addAtEnd(Node item) {
-
-        if (this.head == null) {
-            this.head = item;
-        }
+    public void addNewNode(int value) {
+        Node item = new Node(value, first);
         if (this.last == null) {
-            this.last = head;
-        } else {
-            this.last.setNextNode(item);
-            this.last = this.last.getNext();
+            this.last = item;
         }
+        item.next = this.first;
+        this.first = item;
 
     }
 
-    public Node removeCurrentFirst() {
-        Node temp = this.head;
-        if (this.head != null) {
-            this.head = head.getNext();
-            if (this.head == null) {
+    public void add(Node item) {
 
-                this.last = null;
-            }
+        if (this.last == null) {
+            this.last = item;
         }
-        temp.setNextNode(null);
-        return temp;
+        item.setNextNode(this.first);
+        this.first = item;
+
     }
 
     public void appendList(LinkedList b) {
-        if (this.last == null) { // In order to allow appending of an empty list
-            this.last = b.head;
-        } else {
-            this.last.setNextNode(b.head);
+        if (b != null) {
+
+            if (this.last == null) {
+                this.first = b.first;
+                this.last=b.last;
+            } else {
+                this.last.setNextNode(b.first);
+            }
+
+            this.last = b.last;
         }
-        this.last = this.last.getNext();// Updates last to point towards first node of list b
-        
+        b.first = null;
+        b.last = null;
     }
+
+    public void prepend(LinkedList b) {
+        if (b != null) {
+            if (b.last != null) {
+                b.last.setNextNode(this.first);
+            }
+            if (this.last == null) {
+                this.last = b.last;
+            }
+            if (b.first != null) {
+                this.first = b.first;
+            }
+            b.first = null;
+            b.last = null;
+        }
+    }
+
+    public void sort() {
+        if (this.first == null || this.first.next == null) {
+            return;
+        }
+        LinkedList smaller = new LinkedList();
+        LinkedList larger = new LinkedList();
+
+        Node pivot = this.first;
+
+        Node cur = pivot.next;
+
+        pivot.setNextNode(null);
+
+        this.last = pivot;
+
+        int p = pivot.item;
+
+        while (cur != null) {
+            Node nxt = cur.next;
+            if (p > cur.getItem()) {
+                smaller.add(cur);
+            } else {
+                larger.add(cur);
+            }
+            cur = nxt;
+        }
+
+        smaller.sort();
+        larger.sort();
+
+        this.prepend(smaller);
+        this.appendList(larger);
+    }
+
 }

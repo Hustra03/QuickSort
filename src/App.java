@@ -2,53 +2,85 @@ import java.util.Random;
 
 public class App {
     public static void main(String[] args) throws Exception {
-         QuickSortArrayTest();
-        // QuickSortLinkedListTest();
-
+        // QuickSortArrayTest();
+         QuickSortLinkedListTest();
+        //linkedListTest();
         /*
+         * LinkedList list = new LinkedList();
+         * 
+         * list.addAtEnd(new Node(2, null));
+         * 
+         * list.addAtEnd(new Node(5, null));
+         * 
+         * list.addAtEnd(new Node(5, null));
+         * list.addAtEnd(new Node(4, null));
+         * 
+         * list.addAtEnd(new Node(5, null));
+         * list.addAtEnd(new Node(1, null));
+         * list.addAtEnd(new Node(1, null));
+         * 
+         * list.addAtEnd(new Node(1, null));
+         * list.addAtEnd(new Node(1, null));
+         * list.addAtEnd(new Node(1, null));
+         * 
+         * PrintLinkedList(list, "Original");
+         * 
+         * LinkedList lesser = new LinkedList();
+         * LinkedList greater = new LinkedList();
+         * 
+         * Node pivot = list.removeCurrentFirst();
+         * 
+         * Node current = null;
+         * 
+         * while (list.head != null) {
+         * 
+         * current = list.removeCurrentFirst();
+         * if (current.getItem() < pivot.getItem()) {
+         * lesser.addAtEnd(current);
+         * } else {
+         * greater.addAtEnd(current);
+         * }
+         * }
+         * 
+         * lesser = LinkedListSort(lesser);
+         * 
+         * lesser.addAtEnd(pivot);
+         * greater = LinkedListSort(greater);
+         * lesser.appendList(greater);
+         * 
+         * PrintLinkedList(lesser, "Sorted First Degree");
+         */
+
+    }
+
+    public static void linkedListTest() {
+        Random rnd = new Random();
         LinkedList list = new LinkedList();
 
-        list.addAtEnd(new Node(2, null));
+        LinkedList list2 = new LinkedList();
 
-        list.addAtEnd(new Node(5, null));
-
-        list.addAtEnd(new Node(5, null));
-        list.addAtEnd(new Node(4, null));
-
-        list.addAtEnd(new Node(5, null));
-        list.addAtEnd(new Node(1, null));
-        list.addAtEnd(new Node(1, null));
-
-        list.addAtEnd(new Node(1, null));
-        list.addAtEnd(new Node(1, null));
-        list.addAtEnd(new Node(1, null));
-
-        PrintLinkedList(list, "Original");
-
-        LinkedList lesser = new LinkedList();
-        LinkedList greater = new LinkedList();
-
-        Node pivot = list.removeCurrentFirst();
-
-        Node current = null;
-
-        while (list.head != null) {
-
-            current = list.removeCurrentFirst();
-            if (current.getItem() < pivot.getItem()) {
-                lesser.addAtEnd(current);
-            } else {
-                greater.addAtEnd(current);
-            }
+        LinkedList list3 = new LinkedList();
+        int lengthOfList = 10;
+        for (int i = 0; i < lengthOfList; i++) {
+            list.addNewNode(i);
         }
 
-        lesser = LinkedListSort(lesser);
+        PrintLinkedList(list2, "Before");
+        list2.addNewNode(12);
+        PrintLinkedList(list2, "Add new");
 
-        lesser.addAtEnd(pivot);
-        greater = LinkedListSort(greater);
-        lesser.appendList(greater);
+        list2.addNewNode(12);
+        PrintLinkedList(list2, "Add new 2");
 
-        PrintLinkedList(lesser, "Sorted First Degree"); */
+        list3.addNewNode(12);
+        list3.addNewNode(12);
+
+        list2.appendList(list);
+
+        PrintLinkedList(list2, "Append");
+
+        list3.prepend(list2);
+        PrintLinkedList(list3, "Prepend");
 
     }
 
@@ -60,20 +92,21 @@ public class App {
         }
 
         PrintArray(array);
-        ArraySort(array, 0, 9);
-        PrintArray(array);
+        QuickArray sortedArray = new QuickArray(array);
+        sortedArray.ArraySort(0, sortedArray.array.length - 1);
+        PrintArray(sortedArray.array);
     }
 
     public static void QuickSortLinkedListTest() {
         Random rnd = new Random();
         LinkedList list = new LinkedList();
-        int maxValue = 10;
         int lengthOfList = 10;
         for (int i = 0; i < lengthOfList; i++) {
-            list.addAtEnd(new Node(rnd.nextInt(lengthOfList), null));
+            list.addNewNode(rnd.nextInt(lengthOfList));
+            ;
         }
         PrintLinkedList(list, "Original");
-        list = LinkedListSort(list);
+        list.sort();
         PrintLinkedList(list, "Sorted");
 
     }
@@ -94,7 +127,7 @@ public class App {
 
     public static void PrintLinkedList(LinkedList list, String type) {
         System.out.println("List:" + type);
-        Node current = list.getHead();
+        Node current = list.getFirst();
         int position = 1;
         while (current != null) {
             System.out.println(type + " Position " + (position) + "| Value: " + current.getItem());
@@ -102,81 +135,6 @@ public class App {
             current = current.getNext();
         }
         System.out.println();
-    }
-
-    public static LinkedList LinkedListSort(LinkedList list) {
-        if ((list.head != list.last)) {// If list has 2 or more different elements
-
-            LinkedList lesser = new LinkedList();
-            LinkedList greater = new LinkedList();
-
-            Node pivot = list.removeCurrentFirst();
-
-            Node current = null;
-
-            while (list.head != null) {
-
-                current = list.removeCurrentFirst();
-                if (current.getItem().intValue() < pivot.getItem().intValue()) {
-                    lesser.addAtEnd(current);
-                } else {
-                    greater.addAtEnd(current);
-                }
-            }
-
-            lesser = LinkedListSort(lesser);
-            lesser.addAtEnd(pivot);
-
-            greater = LinkedListSort(greater);
-            lesser.appendList(greater);
-            return lesser;
-        }
-        return list;
-    }
-
-    public static void ArraySort(int[] arrayToBeSorted, int min, int max) {
-
-        if (min < max) {
-            int mid = ArrayPartition(arrayToBeSorted, min, max);
-
-            ArraySort(arrayToBeSorted, min, mid - 1);
-
-            ArraySort(arrayToBeSorted, mid, max);
-
-        }
-
-    }
-
-    public static int ArrayPartition(int[] arrayToBeSorted, int min, int max) {
-        int pivot = min;
-        int i = min + 1;
-        int j = max;
-        while (true) {
-
-            if (j > i) {
-                if (arrayToBeSorted[pivot] < arrayToBeSorted[j]) {
-                    j--;
-                }
-                if (arrayToBeSorted[pivot] > arrayToBeSorted[i]) {
-                    i++;
-                }
-            }
-
-            else {
-                if (i < j) {
-
-                    int temp = i;
-                    i = j;
-                    j = temp;
-                }
-                int temp = arrayToBeSorted[pivot];
-                arrayToBeSorted[pivot] = arrayToBeSorted[j];
-                arrayToBeSorted[j] = temp;
-
-                return j;
-            }
-        }
-
     }
 
 }
