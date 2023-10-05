@@ -5,13 +5,25 @@ public class App {
         // QuickSortArrayTest();
         // QuickSortLinkedListTest();
 
-        Random rnd = new Random();
-
         LinkedList list = new LinkedList();
-        for (int i = 0; i < 10; i++) {
-            list.addAtEnd(new Node(rnd.nextInt(10), null));
-        }
+
+        list.addAtEnd(new Node(2, null));
+
+        list.addAtEnd(new Node(5, null));
+
+        list.addAtEnd(new Node(5, null));
+        list.addAtEnd(new Node(4, null));
+
+        list.addAtEnd(new Node(5, null));
+        list.addAtEnd(new Node(1, null));
+        list.addAtEnd(new Node(1, null));
+
+        list.addAtEnd(new Node(1, null));
+        list.addAtEnd(new Node(1, null));
+        list.addAtEnd(new Node(1, null));
+
         PrintLinkedList(list, "Original");
+
         LinkedList lesser = new LinkedList();
         LinkedList greater = new LinkedList();
 
@@ -22,21 +34,20 @@ public class App {
         while (list.head != null) {
 
             current = list.removeCurrentFirst();
-            if (current.getItem() <= pivot.getItem()) {
+            if (current.getItem() < pivot.getItem()) {
                 lesser.addAtEnd(current);
             } else {
                 greater.addAtEnd(current);
             }
         }
 
-        list = lesser;
-        list = LinkedListSort(list);
-        list.addAtEnd(pivot);
+        lesser = LinkedListSort(lesser);
 
-        greater = LinkedListSort(greater);
-        list.appendList(greater);
+        lesser.addAtEnd(pivot);
+        greater=LinkedListSort(greater);
+        lesser.appendList(greater);
 
-        PrintLinkedList(list, "Sorted First Degree");
+        PrintLinkedList(lesser, "Sorted First Degree");
 
     }
 
@@ -62,7 +73,7 @@ public class App {
         }
         PrintLinkedList(list, "Original");
         list = LinkedListSort(list);
-        PrintLinkedList(list, "Original");
+        PrintLinkedList(list, "Sorted");
 
     }
 
@@ -93,7 +104,7 @@ public class App {
     }
 
     public static LinkedList LinkedListSort(LinkedList list) {
-        if ((list.head != list.last)) {// If list has 2 or more elements
+        if ((list.head != null && list.head.next != null)) {// If list has 2 or more different elements
 
             LinkedList lesser = new LinkedList();
             LinkedList greater = new LinkedList();
@@ -105,19 +116,19 @@ public class App {
             while (list.head != null) {
 
                 current = list.removeCurrentFirst();
-                if (current.getItem() <= pivot.getItem()) {
+                if (current.getItem().intValue() < pivot.getItem().intValue()) {
                     lesser.addAtEnd(current);
                 } else {
                     greater.addAtEnd(current);
                 }
             }
 
-            list = lesser;
-            list = LinkedListSort(list);
-            list.addAtEnd(pivot);
+            lesser = LinkedListSort(lesser);
+            lesser.addAtEnd(pivot);
 
             greater = LinkedListSort(greater);
-            list.appendList(greater);
+            lesser.appendList(greater);
+            return lesser;
         }
         return list;
     }

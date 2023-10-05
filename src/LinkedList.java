@@ -14,7 +14,6 @@ public class LinkedList {
 
     public void addAtEnd(Node item) {
 
-        item.setNextNode(null); // In order to avoid circular arguments
         if (this.head == null) {
             this.head = item;
         }
