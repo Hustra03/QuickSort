@@ -3,7 +3,41 @@ import java.util.Random;
 public class App {
     public static void main(String[] args) throws Exception {
         // QuickSortArrayTest();
-        QuickSortLinkedListTest();
+        // QuickSortLinkedListTest();
+
+        Random rnd = new Random();
+
+        LinkedList list = new LinkedList();
+        for (int i = 0; i < 10; i++) {
+            list.addAtEnd(new Node(rnd.nextInt(10), null));
+        }
+        PrintLinkedList(list, "Original");
+        LinkedList lesser = new LinkedList();
+        LinkedList greater = new LinkedList();
+
+        Node pivot = list.removeCurrentFirst();
+
+        Node current = null;
+
+        while (list.head != null) {
+
+            current = list.removeCurrentFirst();
+            if (current.getItem() <= pivot.getItem()) {
+                lesser.addAtEnd(current);
+            } else {
+                greater.addAtEnd(current);
+            }
+        }
+
+        list = lesser;
+        list = LinkedListSort(list);
+        list.addAtEnd(pivot);
+
+        greater = LinkedListSort(greater);
+        list.appendList(greater);
+
+        PrintLinkedList(list, "Sorted First Degree");
+
     }
 
     public static void QuickSortArrayTest() {
@@ -24,7 +58,7 @@ public class App {
         int maxValue = 10;
         int lengthOfList = 10;
         for (int i = 0; i < lengthOfList; i++) {
-            list.addAtEnd(new Node(10 - i, null));
+            list.addAtEnd(new Node(rnd.nextInt(lengthOfList), null));
         }
         PrintLinkedList(list, "Original");
         list = LinkedListSort(list);
@@ -59,35 +93,31 @@ public class App {
     }
 
     public static LinkedList LinkedListSort(LinkedList list) {
-        if ((list.head != list.last) && list.head != null && list.last != null) {// If list has 2 or more elements
+        if ((list.head != list.last)) {// If list has 2 or more elements
 
             LinkedList lesser = new LinkedList();
             LinkedList greater = new LinkedList();
 
             Node pivot = list.removeCurrentFirst();
 
-            Node current = list.removeCurrentFirst();
+            Node current = null;
 
-            while (current != null) {
-                if (current.getItem() < pivot.getItem()) {
+            while (list.head != null) {
+
+                current = list.removeCurrentFirst();
+                if (current.getItem() <= pivot.getItem()) {
                     lesser.addAtEnd(current);
                 } else {
                     greater.addAtEnd(current);
                 }
-                current = list.removeCurrentFirst();
             }
 
-            PrintLinkedList(lesser, "lesser");
-            lesser = LinkedListSort(lesser);
-            PrintLinkedList(lesser, "lesser");
-
-            PrintLinkedList(greater, "greater");
-            lesser = LinkedListSort(greater);
-            PrintLinkedList(greater, "greater");
-
-            lesser.addAtEnd(pivot);
-            lesser.appendList(greater);
             list = lesser;
+            list = LinkedListSort(list);
+            list.addAtEnd(pivot);
+
+            greater = LinkedListSort(greater);
+            list.appendList(greater);
         }
         return list;
     }
@@ -98,7 +128,7 @@ public class App {
             int mid = ArrayPartition(arrayToBeSorted, min, max);
             if (min + 1 < mid) {
 
-                ArraySort(arrayToBeSorted, min, mid);
+                ArraySort(arrayToBeSorted, min, mid - 1);
             }
             if (mid + 1 < max) {
 

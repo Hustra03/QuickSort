@@ -36,10 +36,7 @@ public class LinkedList {
                 this.last = null;
             }
         }
-        if (temp != null) {
-
-            temp.setNextNode(null);
-        }
+        temp.setNextNode(null);
         return temp;
     }
 
@@ -50,6 +47,6 @@ public class LinkedList {
             this.last.setNextNode(b.head);
         }
         this.last = this.last.getNext();// Updates last to point towards first node of list b
-        b.last.setNextNode(null);
+        
     }
 }
