@@ -32,13 +32,16 @@ public class LinkedList {
 
     }
 
-    public void appendList(LinkedList b) {
+    public void appendList(LinkedList b) { // Ensure that this works for every case, aka no,1 and 2, or more than 2
+                                           // elements for both this and b
+        if (this.first == this.last && first == null) {
+            this.first = b.first;
+            this.last = b.last;
+            return;
+        }
         if (b != null) {
 
-            if (this.last == null) {
-                this.first = b.first;
-                this.last=b.last;
-            } else {
+            if (this.last != null) {
                 this.last.setNextNode(b.first);
             }
 
@@ -48,17 +51,21 @@ public class LinkedList {
         b.last = null;
     }
 
-    public void prepend(LinkedList b) {
+    public void prepend(LinkedList b) {// Ensure that this works for every case, aka no, 1 and 2, or more than 2
+                                       // elements for both this and b
+        if (this.first == this.last && first == null) {
+            this.first = b.first;
+            this.last = b.last;
+            return;
+        }
         if (b != null) {
             if (b.last != null) {
                 b.last.setNextNode(this.first);
             }
-            if (this.last == null) {
-                this.last = b.last;
-            }
             if (b.first != null) {
                 this.first = b.first;
             }
+
             b.first = null;
             b.last = null;
         }
@@ -91,8 +98,8 @@ public class LinkedList {
             cur = nxt;
         }
 
-        smaller.sort();
         larger.sort();
+        smaller.sort();
 
         this.prepend(smaller);
         this.appendList(larger);
