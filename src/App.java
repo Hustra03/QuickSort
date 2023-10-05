@@ -3,8 +3,8 @@ import java.util.Random;
 public class App {
     public static void main(String[] args) throws Exception {
         // QuickSortArrayTest();
-        //QuickSortLinkedListTest();
-        linkedListAppendTest();
+        QuickSortLinkedListTest();
+        //linkedListAppendTest();
         /*
          * LinkedList list = new LinkedList();
          * 
