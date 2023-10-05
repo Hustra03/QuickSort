@@ -2,9 +2,10 @@ import java.util.Random;
 
 public class App {
     public static void main(String[] args) throws Exception {
-        // QuickSortArrayTest();
+         QuickSortArrayTest();
         // QuickSortLinkedListTest();
 
+        /*
         LinkedList list = new LinkedList();
 
         list.addAtEnd(new Node(2, null));
@@ -44,10 +45,10 @@ public class App {
         lesser = LinkedListSort(lesser);
 
         lesser.addAtEnd(pivot);
-        greater=LinkedListSort(greater);
+        greater = LinkedListSort(greater);
         lesser.appendList(greater);
 
-        PrintLinkedList(lesser, "Sorted First Degree");
+        PrintLinkedList(lesser, "Sorted First Degree"); */
 
     }
 
@@ -104,7 +105,7 @@ public class App {
     }
 
     public static LinkedList LinkedListSort(LinkedList list) {
-        if ((list.head != null && list.head.next != null)) {// If list has 2 or more different elements
+        if ((list.head != list.last)) {// If list has 2 or more different elements
 
             LinkedList lesser = new LinkedList();
             LinkedList greater = new LinkedList();
@@ -135,16 +136,13 @@ public class App {
 
     public static void ArraySort(int[] arrayToBeSorted, int min, int max) {
 
-        if (min + 1 < max) {
+        if (min < max) {
             int mid = ArrayPartition(arrayToBeSorted, min, max);
-            if (min + 1 < mid) {
 
-                ArraySort(arrayToBeSorted, min, mid - 1);
-            }
-            if (mid + 1 < max) {
+            ArraySort(arrayToBeSorted, min, mid - 1);
 
-                ArraySort(arrayToBeSorted, mid, max);
-            }
+            ArraySort(arrayToBeSorted, mid, max);
+
         }
 
     }
