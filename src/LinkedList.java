@@ -37,6 +37,8 @@ public class LinkedList {
         if ( first == null) {
             this.first = b.first;
             this.last = b.last;
+            b.first = null;
+            b.last = null;
 
             return;
         }
@@ -47,9 +49,10 @@ public class LinkedList {
             }
 
             this.last = b.last;
+            
+            b.first = null;
+            b.last = null;
         }
-        b.first = null;
-        b.last = null;
     }
 
     public void prepend(LinkedList b) {// Ensure that this works for every case, aka no, 1 and 2, or more than 2
@@ -57,6 +60,8 @@ public class LinkedList {
         if (first == null) {
             this.first = b.first;
             this.last = b.last;
+            b.first = null;
+            b.last = null;
             return;
         }
         if (b != null) {
