@@ -2,9 +2,9 @@ import java.util.Random;
 
 public class App {
     public static void main(String[] args) throws Exception {
-        // QuickSortArrayTest();
-        QuickSortLinkedListTest();
-        //linkedListAppendTest();
+        QuickSortArrayTest();
+        // QuickSortLinkedListTest();
+        // linkedListAppendTest();
         /*
          * LinkedList list = new LinkedList();
          * 
@@ -83,8 +83,8 @@ public class App {
         LinkedList list25 = new LinkedList();
         LinkedList list26 = new LinkedList();
         LinkedList list27 = new LinkedList();
-        LinkedList list28 = new LinkedList();    
-        
+        LinkedList list28 = new LinkedList();
+
         LinkedList list31 = new LinkedList();
         LinkedList list32 = new LinkedList();
         LinkedList list33 = new LinkedList();
@@ -94,7 +94,6 @@ public class App {
         LinkedList list36 = new LinkedList();
         LinkedList list37 = new LinkedList();
         LinkedList list38 = new LinkedList();
-
 
         for (int i = 1; i < 2; i++) {
             list11.addNewNode(i);
@@ -129,60 +128,60 @@ public class App {
             list35.addNewNode(i);
             list36.addNewNode(i);
             list37.addNewNode(i);
-            list38.addNewNode(i);            
+            list38.addNewNode(i);
         }
 
-
-        /* 
-        list01.appendList(list05);
-        PrintLinkedList(list01, "0 appended by 0");
-
-        list02.appendList(list15);
-        PrintLinkedList(list02, "0 appended by 1");
-
-        list03.appendList(list25);
-        PrintLinkedList(list03, "0 appended by 2");
-
-        list04.appendList(list35);
-        PrintLinkedList(list04, "0 appended by 3");
-
-
-        list11.appendList(list06);
-        PrintLinkedList(list11, "1 appended by 0");
-
-        list12.appendList(list16);
-        PrintLinkedList(list12, "1 appended by 1");
-
-        list13.appendList(list26);
-        PrintLinkedList(list13, "1 appended by 2");
-
-        list14.appendList(list36);
-        PrintLinkedList(list14, "1 appended by 3");
-
-
-        list21.appendList(list07);
-        PrintLinkedList(list21, "2 appended by 0");
-
-        list22.appendList(list17);
-        PrintLinkedList(list22, "2 appended by 1");
-
-        list23.appendList(list27);
-        PrintLinkedList(list23, "2 appended by 2");
-
-        list24.appendList(list37);
-        PrintLinkedList(list24, "2 appended by 3");
-
-        list31.appendList(list08);
-        PrintLinkedList(list31, "3 appended by 0");
-
-        list32.appendList(list18);
-        PrintLinkedList(list32, "3 appended by 1");
-
-        list33.appendList(list28);
-        PrintLinkedList(list33, "3 appended by 2");
-
-        list34.appendList(list38);
-        PrintLinkedList(list34, "3 appended by 3");*/
+        /*
+         * list01.appendList(list05);
+         * PrintLinkedList(list01, "0 appended by 0");
+         * 
+         * list02.appendList(list15);
+         * PrintLinkedList(list02, "0 appended by 1");
+         * 
+         * list03.appendList(list25);
+         * PrintLinkedList(list03, "0 appended by 2");
+         * 
+         * list04.appendList(list35);
+         * PrintLinkedList(list04, "0 appended by 3");
+         * 
+         * 
+         * list11.appendList(list06);
+         * PrintLinkedList(list11, "1 appended by 0");
+         * 
+         * list12.appendList(list16);
+         * PrintLinkedList(list12, "1 appended by 1");
+         * 
+         * list13.appendList(list26);
+         * PrintLinkedList(list13, "1 appended by 2");
+         * 
+         * list14.appendList(list36);
+         * PrintLinkedList(list14, "1 appended by 3");
+         * 
+         * 
+         * list21.appendList(list07);
+         * PrintLinkedList(list21, "2 appended by 0");
+         * 
+         * list22.appendList(list17);
+         * PrintLinkedList(list22, "2 appended by 1");
+         * 
+         * list23.appendList(list27);
+         * PrintLinkedList(list23, "2 appended by 2");
+         * 
+         * list24.appendList(list37);
+         * PrintLinkedList(list24, "2 appended by 3");
+         * 
+         * list31.appendList(list08);
+         * PrintLinkedList(list31, "3 appended by 0");
+         * 
+         * list32.appendList(list18);
+         * PrintLinkedList(list32, "3 appended by 1");
+         * 
+         * list33.appendList(list28);
+         * PrintLinkedList(list33, "3 appended by 2");
+         * 
+         * list34.appendList(list38);
+         * PrintLinkedList(list34, "3 appended by 3");
+         */
 
         list01.prepend(list05);
         PrintLinkedList(list01, "0 prepend by 0");
@@ -196,7 +195,6 @@ public class App {
         list04.prepend(list35);
         PrintLinkedList(list04, "0 prepend by 3");
 
-
         list11.prepend(list06);
         PrintLinkedList(list11, "1 prepend by 0");
 
@@ -208,7 +206,6 @@ public class App {
 
         list14.prepend(list36);
         PrintLinkedList(list14, "1 prepend by 3");
-
 
         list21.prepend(list07);
         PrintLinkedList(list21, "2 prepend by 0");
@@ -244,7 +241,7 @@ public class App {
 
         PrintArray(array);
         QuickArray sortedArray = new QuickArray(array);
-        sortedArray.ArraySort(0, sortedArray.array.length - 1);
+        sortedArray.array = sortedArray.ArraySort(sortedArray.array, 0, sortedArray.array.length - 1);
         PrintArray(sortedArray.array);
     }
 

@@ -5,60 +5,39 @@ public class QuickArray {
         this.array = array;
     }
 
-    public void ArraySort(int min, int max) {
+    public int[] ArraySort(int array[], int min, int max) {
 
+        this.array = array;
         if (min < max) {
 
-            int pivot = min;
-            int i = min + 1;
-            int j = max;
-            while (j >= i) {
+            int mid = ArrayPartition(array, min, max);
 
-                if (this.array[pivot] < this.array[j]) {
-                    j--;
-                }
-                if (this.array[pivot] > this.array[i]) {
-                    i++;
-                }
+            array = ArraySort(array, min, mid);
 
-                if (this.array[j] <= this.array[i]) {
-
-                    int temp = this.array[i];
-                    this.array[i] = this.array[j];
-                    this.array[j] = temp;
-                }
-            }
-            if (i < j) {
-                int temp = i;
-                i = j;
-                j = temp;
-            }
-            int temp = this.array[pivot];
-            this.array[pivot] = this.array[j];
-            this.array[j] = temp;
-
-            int mid = j;
-
-            ArraySort(min, mid - 1);
-
-            ArraySort(mid, max);
+            array = ArraySort(array, mid + 1, max);
         }
-
+        return this.array;
     }
 
     public int ArrayPartition(int[] arrayToBeSorted, int min, int max) {
         int pivot = min;
         int i = min + 1;
         int j = max;
-        while (j > i) {
+        while (j >= i) {
 
-            if (arrayToBeSorted[pivot] < arrayToBeSorted[j]) {
+            if (this.array[pivot] < this.array[j]) {
                 j--;
             } else {
-                if (arrayToBeSorted[pivot] > arrayToBeSorted[i]) {
+                if (this.array[pivot] > this.array[i]) {
                     i++;
                 } else {
-                    break;
+
+                    int temp = this.array[i];
+                    this.array[i] = this.array[j];
+                    this.array[j] = temp;
+                    i++;
+                    j--;
+
                 }
             }
 
@@ -68,10 +47,9 @@ public class QuickArray {
             i = j;
             j = temp;
         }
-        int temp = arrayToBeSorted[pivot];
-        arrayToBeSorted[pivot] = arrayToBeSorted[j];
-        arrayToBeSorted[j] = temp;
-
+        int temp = this.array[pivot];
+        this.array[pivot] = this.array[j];
+        this.array[j] = temp;
         return j;
 
     }
