@@ -37,6 +37,9 @@ public class LinkedList {
         if (this.first == this.last && first == null) {
             this.first = b.first;
             this.last = b.last;
+
+            b.first = null;
+            b.last = null;
             return;
         }
         if (b != null) {

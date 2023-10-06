@@ -5,51 +5,10 @@ public class App {
         QuickSortArrayTest();
         // QuickSortLinkedListTest();
         // linkedListAppendTest();
-        /*
-         * LinkedList list = new LinkedList();
-         * 
-         * list.addAtEnd(new Node(2, null));
-         * 
-         * list.addAtEnd(new Node(5, null));
-         * 
-         * list.addAtEnd(new Node(5, null));
-         * list.addAtEnd(new Node(4, null));
-         * 
-         * list.addAtEnd(new Node(5, null));
-         * list.addAtEnd(new Node(1, null));
-         * list.addAtEnd(new Node(1, null));
-         * 
-         * list.addAtEnd(new Node(1, null));
-         * list.addAtEnd(new Node(1, null));
-         * list.addAtEnd(new Node(1, null));
-         * 
-         * PrintLinkedList(list, "Original");
-         * 
-         * LinkedList lesser = new LinkedList();
-         * LinkedList greater = new LinkedList();
-         * 
-         * Node pivot = list.removeCurrentFirst();
-         * 
-         * Node current = null;
-         * 
-         * while (list.head != null) {
-         * 
-         * current = list.removeCurrentFirst();
-         * if (current.getItem() < pivot.getItem()) {
-         * lesser.addAtEnd(current);
-         * } else {
-         * greater.addAtEnd(current);
-         * }
-         * }
-         * 
-         * lesser = LinkedListSort(lesser);
-         * 
-         * lesser.addAtEnd(pivot);
-         * greater = LinkedListSort(greater);
-         * lesser.appendList(greater);
-         * 
-         * PrintLinkedList(lesser, "Sorted First Degree");
-         */
+        int lengthsToTest[] = { 128, 256, 512, 1024, 2048, 4096 };
+        for (int i : lengthsToTest) {
+            QuickSortBenchmark(i);
+        }
 
     }
 
@@ -259,6 +218,23 @@ public class App {
 
     }
 
+    public static void QuickSortBenchmark(int length) {
+        Random rnd = new Random();
+        int array[] = new int[length];
+        LinkedList list=new LinkedList();
+
+        for (int i = 0; i < length; i++) {//Creates array and linked list with same random elements
+            array[i] = rnd.nextInt(length);
+            list.addNewNode(array[i]);
+        }
+
+        long t0=System.nanoTime();
+
+        long t1=System.nanoTime()-t0;
+
+        System.out.println("Time:"+"");
+
+    }
     // Linked list works by dividing the list in two, greater than and lesser than
     // the pivot element, We then use quick-sort recursivly on these lists in order
     // to sort them, and then appnends the lesser with the pivot, then the greater
