@@ -54,7 +54,7 @@ public class LinkedList {
 
     public void prepend(LinkedList b) {// Ensure that this works for every case, aka no, 1 and 2, or more than 2
                                        // elements for both this and b
-        if (this.first == this.last && first == null) {
+        if (first == null) {
             this.first = b.first;
             this.last = b.last;
             return;
@@ -87,7 +87,6 @@ public class LinkedList {
         this.last = null;
         this.first=null;
 
-        pivot.setNextNode(null);
 
         while (cur != null) {
             Node nxt = cur.next;
