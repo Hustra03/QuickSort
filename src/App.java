@@ -2,17 +2,16 @@ import java.util.Random;
 
 public class App {
     public static void main(String[] args) throws Exception {
-         //QuickSortArrayTest();
-        QuickSortLinkedListTest();
+        // QuickSortArrayTest();
+        // QuickSortLinkedListTest();
         // linkedListAppendTest();
-        //linkedListAppendTest2();
-        
-         /*  int lengthsToTest[] = { 128, 256, 512, 1024, 2048, 4096 };
-          for (int i : lengthsToTest) {
-          QuickSortBenchmark(i);
-          System.out.println();
-          }*/
-         
+        // linkedListAppendTest2();
+
+        int lengthsToTest[] = { 128, 256, 512, 1024, 2048, 4096 };
+        for (int i : lengthsToTest) {
+            QuickSortBenchmark(i);
+            System.out.println();
+        }
 
     }
 
@@ -60,7 +59,7 @@ public class App {
                 if (first == null) {
                     throw new Exception();
                 }
-                first=first.next;
+                first = first.next;
             }
             list.sort(lengthOfList);
             first = list.first;
@@ -68,7 +67,7 @@ public class App {
                 if (first == null) {
                     throw new Exception();
                 }
-                first=first.next;
+                first = first.next;
             }
         }
 
