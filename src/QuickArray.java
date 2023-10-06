@@ -42,11 +42,6 @@ public class QuickArray {
             }
 
         }
-        if (i < j) {
-            int temp = i;
-            i = j;
-            j = temp;
-        }
         int temp = this.array[pivot];
         this.array[pivot] = this.array[j];
         this.array[j] = temp;
