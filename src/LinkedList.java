@@ -17,7 +17,6 @@ public class LinkedList {
         if (this.last == null) {
             this.last = item;
         }
-        item.next = this.first;
         this.first = item;
 
     }
@@ -27,6 +26,7 @@ public class LinkedList {
         if (this.last == null) {
             this.last = item;
         }
+
         item.setNextNode(this.first);
         this.first = item;
 
@@ -34,12 +34,10 @@ public class LinkedList {
 
     public void appendList(LinkedList b) { // Ensure that this works for every case, aka no,1 and 2, or more than 2
                                            // elements for both this and b
-        if (this.first == this.last && first == null) {
+        if ( first == null) {
             this.first = b.first;
             this.last = b.last;
 
-            b.first = null;
-            b.last = null;
             return;
         }
         if (b != null) {
@@ -74,10 +72,11 @@ public class LinkedList {
         }
     }
 
-    public void sort() {
+    public void sort(int level) {
         if (this.first == null || this.first.next == null) {
             return;
         }
+
         LinkedList smaller = new LinkedList();
         LinkedList larger = new LinkedList();
 
@@ -85,15 +84,14 @@ public class LinkedList {
 
         Node cur = pivot.next;
 
+        this.last = null;
+        this.first=null;
+
         pivot.setNextNode(null);
-
-        this.last = pivot;
-
-        int p = pivot.item;
 
         while (cur != null) {
             Node nxt = cur.next;
-            if (p > cur.getItem()) {
+            if (pivot.getItem() >= cur.getItem()) {
                 smaller.add(cur);
             } else {
                 larger.add(cur);
@@ -101,11 +99,34 @@ public class LinkedList {
             cur = nxt;
         }
 
-        larger.sort();
-        smaller.sort();
+        //PrintLinkedList(this, "Current Pivot :" + level);
+
+        //PrintLinkedList(smaller, "Smaller :" + level);
+
+       // PrintLinkedList(larger, "Larger :" + level);
+
+        larger.sort(level + 1);
+
+        this.appendList(larger);
+        
+        this.add(pivot);
+
+        smaller.sort(level + 1);
 
         this.prepend(smaller);
-        this.appendList(larger);
+
+    }
+
+    public static void PrintLinkedList(LinkedList list, String type) {
+        System.out.println("List:" + type);
+        Node current = list.getFirst();
+        int position = 1;
+        while (current != null) {
+            System.out.println(type + " Position " + (position) + "| Value: " + current.getItem());
+            position++;
+            current = current.getNext();
+        }
+        System.out.println();
     }
 
 }
