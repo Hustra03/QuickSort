@@ -12,7 +12,7 @@ public class QuickArray {
 
             int mid = ArrayPartition(array, min, max);
 
-            array = ArraySort(array, min, mid);
+            array = ArraySort(array, min, mid-1);
 
             array = ArraySort(array, mid + 1, max);
         }
