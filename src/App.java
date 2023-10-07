@@ -101,8 +101,6 @@ public class App {
 
     public static void QuickSortBenchmark(int length) {
         Random rnd = new Random();
-        int array[] = new int[length];
-        LinkedList list = new LinkedList();
 
         int numberOfAttempts = 200;
 
@@ -114,8 +112,24 @@ public class App {
 
         for (int j = 0; j < numberOfAttempts; j++) {
 
+            int array[] = new int[length];
+            int array2[] = new int[length];
+            LinkedList list = new LinkedList();
+            LinkedList list2 = new LinkedList();
+
+            for (int i = 0; i < length; i++) {
+                array2[i] = i;
+                list2.addNewNode(i);
+            }
+            list2.sort(length);
+            QuickArray quickArray2 = new QuickArray(array2);
+            quickArray2.ArraySort(array2, length, length);
+
             for (int i = 0; i < length; i++) {// Creates array and linked list with same random elements
                 array[i] = rnd.nextInt(length);
+            }
+
+            for (int i = length - 1; i >= 0; i--) {
                 list.addNewNode(array[i]);
             }
 
