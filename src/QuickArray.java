@@ -7,16 +7,15 @@ public class QuickArray {
 
     public int[] ArraySort(int array[], int min, int max) {
 
-        this.array = array;
         if (min < max) {
 
-            int mid = ArrayPartition(array, min, max);
+            int pivot = ArrayPartition(array, min, max);
 
-            array = ArraySort(array, min, mid - 1);
+            array = ArraySort(array, min, pivot-1);
 
-            array = ArraySort(array, mid + 1, max);
+            array = ArraySort(array, pivot+1, max);
         }
-        return this.array;
+        return array;
     }
 
     public int ArrayPartition(int[] arrayToBeSorted, int min, int max) {
